@@ -10,22 +10,13 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
-
-import PCommand.ActionPress.ActionDragged;
-import PCommand.PBP.ActionColor;
-import PCommand.PBP.ActionWidth;
-
 
 // реализует все наши листнеры
 // содержит бизнеслогику и привинчивает её к юаю
 public class PCommand
 {
-
-
-	PData data;
 
 	ActionColor aColor;
 	ActionWidth aWidth;	
@@ -36,7 +27,8 @@ public class PCommand
 	
 	private int x = 0; 
 	private int y = 0;
-	
+	private PData data;
+
 	private static PCommand instance = null;
 	
 	private PCommand() 
@@ -46,6 +38,9 @@ public class PCommand
 		aWidth = new ActionWidth();
 		aPress = new ActionPressed();
 		aDagged = new ActionDragged();
+		aSave = new ActionSave();
+		aLoad = new ActionLoad();
+				
 	}
 	
 	public static PCommand getInstance() 
@@ -58,41 +53,7 @@ public class PCommand
 		return instance;
 	}
 	
-	class ActionSave implements MouseListener
-	{
 
-		@Override
-		public void mouseClicked(MouseEvent e) {
-
-			
-			
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-	}
 	class ActionLoad
 	{
 		
@@ -120,16 +81,11 @@ public class PCommand
 		public void mousePressed(MouseEvent e) {
 			x = e.getX();
 			y = e.getY();
-//			IPaintComponent pan = new (IPaintComponent) e.getComponent();
-//			pan.drawLine(x, y, x2, y2, data.width, data.color);
-			
-//			x = x2;
-//			y = y2;
 			
 		}
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
+			
 			
 		}
 	}
@@ -142,18 +98,10 @@ public class PCommand
 			
 			int	x2 = e.getX();
 			int	y2 = e.getY();
-			PPan pan = (PPan) e.getComponent();
-			pan.drawLine(x, y, x2, y2, data.width, data.color);
-			
-//			Graphics2D gg = (Graphics2D) bi.getGraphics();
-//			gg.setColor( data.color);
-//			gg.setStroke(new BasicStroke( data.width ));
-//			gg.drawLine(x1, y1, x2, y2);
-			
+			IPaintComponent pan = (IPaintComponent) e.getSource();
+			pan.drawLine(x, y, x2, y2, data.getWidth(), data.getColor());
 			x = x2;
-//			gg.setColor(x);
 			y = y2;
-//			repaint();
 			
 		}
 		
@@ -175,26 +123,20 @@ public class PCommand
 			switch (color) 
 			{
 			case "red": 
-				data.color = Color.RED;
+				data.setColor( Color.RED );
 				break;
 			case "blue": 
-				data.color = Color.BLUE;
+				data.setColor( Color.BLUE );
 				break;
 			case "black": 
-				data.color = Color.BLACK;
+				data.setColor( Color.BLACK );
 				break;
 			}
 		
 		}
 	}
 
-//	public void paint(Graphics g)
-//	{
-//		super.paint(g);
-//		
-//		Graphics2D gg = (Graphics2D) g;
-//		gg.drawImage(bi, null, 0, 0);
-//	}
+
 	
 	class ActionWidth implements ActionListener{
 
@@ -206,40 +148,126 @@ public class PCommand
 			switch (width) 
 			{
 			case "th1": 
-				data.width = 1;
+				data.setWidth( 1 );
 				break;
 			case "th5":
-				data.width = 5;
+				data.setWidth( 5 );
 				break;
 			case "th10":
-				data.width = 10; 
+				data.setWidth( 10 ); 
 				break;
 			}
 		}
 	}
 	
+//	class ActionSave implements MouseListener
+//	{
+//
 	
+//		
+//	}	
+	class ActionSave implements ActionListener, MouseListener{
 	
-	
-	public void SaveToFile(ActionEvent e)
-	{
-		try {
-	
-			    BufferedImage bi = (BufferedImage)e.getSource();;
+		@Override
+		public void actionPerformed(ActionEvent p) 
+		{
+//			String width =   e.getActionCommand();
+			try {
+				
+			    BufferedImage bi = (BufferedImage)p.getSource();
 			    File FileToSave = new File("C:\\saved.png");
 			    ImageIO.write(bi, "jpg", FileToSave);
 		
 		}catch (IOException fileSave) {}
+		}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				actionPerformed(ActionEvent p);
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		}
+
+		public void saveToFile(ActionEvent e)
+		{
+			try {
+		
+				    BufferedImage bi = (BufferedImage)e.getSource();
+				    File FileToSave = new File("C:\\saved.png");
+				    ImageIO.write(bi, "jpg", FileToSave);
+			
+			}catch (IOException fileSave) {}
+		}
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	
 	}
 	
-	public void LoadFromFile(ActionEvent e)
+
+	
+	
+	public void loadFromFile(ActionEvent e)
 	{
 
-		try {
-			
-			File FileToLoad = new File("");
-			
-		} catch(IOException fileLoad) {}
+//		try {
+//			
+//			File FileToLoad = new File("");
+//			
+//		} catch(IOException fileLoad) {}
 		
 	}
 

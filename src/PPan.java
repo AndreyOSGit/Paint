@@ -27,10 +27,12 @@ public class PPan extends JPanel implements IPaintComponent
 	public PPan() 
 	{	
 
+		data = PData.getInstance();
 		PCommand cmd = PCommand.getInstance();
 		
 		setBackground(Color.ORANGE);
 		setBounds(0, 0, 600, 600 );
+		
 		addMouseListener(cmd.aPress);
 		addMouseMotionListener(cmd.aDagged);
 		
@@ -39,25 +41,25 @@ public class PPan extends JPanel implements IPaintComponent
 		gg.fillRect(0, 0, 600, 600);
 
 	}
-	
+	@Override
 	public void drawLine(int x1, int y1, int x2, int y2, int width, Color clr)
 	{
-		
-//		int	x2 = e.getX();
-//		int	y2 = e.getY();
-//		PPan apn = new (PPan) e.getComponent();
-		
 		Graphics2D gg = (Graphics2D) bi.getGraphics();
-		gg.setColor( data.color);
-		gg.setStroke(new BasicStroke( data.width ));
+		gg.setColor( data.getColor());
+		gg.setStroke(new BasicStroke( data.getWidth() ));
 		gg.drawLine(x1, y1, x2, y2);
-		
-		x1 = x2;
-//		gg.setColor(x);
-		y1 = y2;
-		repaint();
+		repaint();	
+
+
 	}
-	
+	@Override
+	public void paint(Graphics g)
+	{
+		super.paint(g);
+		
+		Graphics2D gg = (Graphics2D) g;
+		gg.drawImage(bi, null, 0, 0);
+	}
 	
 	
 

@@ -3,8 +3,8 @@ import java.awt.Color;
 public class PData 
 {
 	//В чем хранить колор ??? - обект сделать специальный или переменные
-	int width;
-	Color color; // В какой примитив перегнать колор ? - в трех переменных типа байт
+	private int width;
+	private Color color; // В какой примитив перегнать колор ? - в трех переменных типа байт
 	private static PData instance = null;
 	
 	private PData() 
@@ -22,6 +22,28 @@ public class PData
 		
 		return instance;
 	}
+	
+	public int getWidth() {
+		
+		return width;
+	}
+	
+	public Color getColor() {
+		
+		return color;
+	}
+	
+	public void setWidth(int newWidth) {
+		
+		this.width = newWidth;
+	}
+	
+	public void setColor(Color newColor) {
+	
+		this.color = newColor;
+	}
+	
+	
 	//целочисленные типы есть в любом языке прграммирования и можно получить их побитовым сдвигом 
 //	{
 //	int red;
