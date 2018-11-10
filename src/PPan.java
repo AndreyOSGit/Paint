@@ -25,10 +25,13 @@ public class PPan extends JPanel implements IPaintComponent
 	private PData data;
 
 	public PPan() 
+	{	}
+	
+	public PPan(PCommand cmd) 
 	{	
 
 		data = PData.getInstance();
-		PCommand cmd = PCommand.getInstance();
+//		PCommand cmd = PCommand.getInstance();
 		
 		setBackground(Color.ORANGE);
 		setBounds(0, 0, 600, 600 );

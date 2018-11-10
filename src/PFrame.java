@@ -20,7 +20,8 @@ public class PFrame extends JFrame implements IPaintComponent
 	
 	setBounds(0, 10, 800, 600);
 
-	add( new PPan() );
+	add(new MyJTabbedPanel());
+//	add( new PPan() );
 	add( new PButtonPanel() );
 	// рискуем не найти элемент , если не добавим их до того как отобразим фрейм
 	setVisible(true);

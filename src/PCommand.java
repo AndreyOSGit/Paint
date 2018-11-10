@@ -24,11 +24,15 @@ public class PCommand
 	ActionDragged aDagged;
 	ActionSave aSave;
 	ActionLoad aLoad;
+	ActionAddTab aAddTab;
+	ActionDelTab aDelTab;
 	
 	private int x = 0; 
 	private int y = 0;
 	private PData data;
 
+	MyJTabbedPanel tablePanel;
+	
 	private static PCommand instance = null;
 	
 	private PCommand() 
@@ -40,7 +44,10 @@ public class PCommand
 		aDagged = new ActionDragged();
 		aSave = new ActionSave();
 		aLoad = new ActionLoad();
-				
+		aAddTab = new ActionAddTab();
+		aDelTab = new ActionDelTab();
+		
+		
 	}
 	
 	public static PCommand getInstance() 
@@ -58,6 +65,8 @@ public class PCommand
 	{
 		
 	}
+	
+	
 	
 	class ActionPressed implements MouseListener
 	{
@@ -110,6 +119,28 @@ public class PCommand
 			
 		}
 	}
+	
+	
+	class ActionTabPanel implements ActionListener
+	{
+		@Override
+		public void actionPerformed(ActionEvent e) 
+		{
+			String TabAction =   e.getActionCommand();
+			System.out.println(TabAction);
+			switch (TabAction) 
+			{
+			case "AddTab": 
+				tablePanel.addNewTab();
+				break;
+			case "DelTab": 
+				tablePanel.deleteSelectedTab();
+				break;
+			}
+		
+		}
+		
+	}
 		
 	//p Command Дл актин листнеров 
 	class ActionColor implements ActionListener
@@ -160,69 +191,8 @@ public class PCommand
 		}
 	}
 	
-//	class ActionSave implements MouseListener
-//	{
-//
-	
-//		
-//	}	
-	class ActionSave implements ActionListener, MouseListener{
-	
-		@Override
-		public void actionPerformed(ActionEvent p) 
-		{
-//			String width =   e.getActionCommand();
-			try {
-				
-			    BufferedImage bi = (BufferedImage)p.getSource();
-			    File FileToSave = new File("C:\\saved.png");
-			    ImageIO.write(bi, "jpg", FileToSave);
-		
-		}catch (IOException fileSave) {}
-		}
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-
-				actionPerformed(ActionEvent p);
-				
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-		}
-
-		public void saveToFile(ActionEvent e)
-		{
-			try {
-		
-				    BufferedImage bi = (BufferedImage)e.getSource();
-				    File FileToSave = new File("C:\\saved.png");
-				    ImageIO.write(bi, "jpg", FileToSave);
-			
-			}catch (IOException fileSave) {}
-		}
+	class ActionSave implements MouseListener
+	{
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
@@ -253,9 +223,98 @@ public class PCommand
 			// TODO Auto-generated method stub
 			
 		}
-		
-	
-	}
+	}	
+
+//	class ActionSave implements ActionListener, MouseListener{
+//	
+//		@Override
+//		public void actionPerformed(ActionEvent p) 
+//		{
+////			String width =   e.getActionCommand();
+//			try {
+//				
+//			    BufferedImage bi = (BufferedImage)p.getSource();
+//			    File FileToSave = new File("C:\\saved.png");
+//			    ImageIO.write(bi, "jpg", FileToSave);
+//		
+//		}catch (IOException fileSave) {}
+//		}
+//			
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//
+//				actionPerformed(ActionEvent p);
+//				
+//			}
+//
+//			@Override
+//			public void mouseEntered(MouseEvent e) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//
+//			@Override
+//			public void mouseExited(MouseEvent e) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//
+//			@Override
+//			public void mousePressed(MouseEvent e) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//
+//			@Override
+//			public void mouseReleased(MouseEvent e) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//		}
+//
+//		public void saveToFile(ActionEvent e)
+//		{
+//			try {
+//		
+//				    BufferedImage bi = (BufferedImage)e.getSource();
+//				    File FileToSave = new File("C:\\saved.png");
+//				    ImageIO.write(bi, "jpg", FileToSave);
+//			
+//			}catch (IOException fileSave) {}
+//		}
+//
+//		@Override
+//		public void mouseClicked(MouseEvent e) {
+//			// TODO Auto-generated method stub
+//			
+//		}
+//
+//		@Override
+//		public void mouseEntered(MouseEvent e) {
+//			// TODO Auto-generated method stub
+//			
+//		}
+//
+//		@Override
+//		public void mouseExited(MouseEvent e) {
+//			// TODO Auto-generated method stub
+//			
+//		}
+//
+//		@Override
+//		public void mousePressed(MouseEvent e) {
+//			// TODO Auto-generated method stub
+//			
+//		}
+//
+//		@Override
+//		public void mouseReleased(MouseEvent e) {
+//			// TODO Auto-generated method stub
+//			
+//		}
+//		
+//	
+//	}
 	
 
 	

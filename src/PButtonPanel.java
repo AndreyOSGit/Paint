@@ -42,6 +42,9 @@ public PButtonPanel() {
 	JButton Thikness5 = new JButton("5px");
 	JButton Thikness10 = new JButton("10px");
 	
+	JButton AddNewTab = new JButton("AddNewTab");
+	JButton	DelTab = new JButton("DelTab");
+	
 	JRadioButton RadioLine = new JRadioButton("Line");
 	JRadioButton RadioRectangle = new JRadioButton("Rectangle");
 	JRadioButton RadioEllipse = new JRadioButton("Ellipse");
@@ -83,6 +86,9 @@ public PButtonPanel() {
 	Thikness10.setActionCommand("th10");	
 	SaveImage.setActionCommand("save");
 	LoadImage.setActionCommand("load");
+	AddNewTab.setActionCommand("AddTab");
+	DelTab.setActionCommand("DelTab");
+	
 	
 	RedButton.addActionListener(cmd.aColor);
 	BlueButton.addActionListener(cmd.aColor);
@@ -90,8 +96,11 @@ public PButtonPanel() {
 	Thikness1.addActionListener(cmd.aWidth);
 	Thikness5.addActionListener(cmd.aWidth);
 	Thikness10.addActionListener(cmd.aWidth);
-	SaveImage.addActionListener(cmd.aSave);
-	LoadImage.addActionListener(cmd.aLoad);
+//	SaveImage.addActionListener(cmd.aSave);
+//	LoadImage.addActionListener(cmd.aLoad);
+	AddNewTab.addActionListener(cmd.aAddTab);
+	DelTab.addActionListener(cmd.aDelTab); 
+	
 	
 	add(SaveImage);
 	add(LoadImage);
@@ -109,6 +118,8 @@ public PButtonPanel() {
 	add (Slider);
 	add(RadioLine);
 	add(RadioCurve);
+	add(AddNewTab);
+	add(DelTab);
 	}
 	
 	
